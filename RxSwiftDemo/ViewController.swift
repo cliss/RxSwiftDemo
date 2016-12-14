@@ -18,15 +18,18 @@ class ViewController: UIViewController {
     
     // MARK: ivars
     private let disposeBag = DisposeBag()
-    private var count = 0
     
     override func viewDidLoad() {
         self.button.rx.tap
             .debug("button tap")
-            .subscribe(onNext: { [unowned self] _ in
-                self.count += 1
-                self.label.text = "You tapped that button \(self.count) times."
-            }).addDisposableTo(disposeBag)
+            .scan(0) { (priorValue, _) in
+                return priorValue + 1
+            }
+            .debug("after scan")
+            .subscribe(onNext: { [unowned self] currentCount in
+                self.label.text = "You have tapped that button \(currentCount) times."
+            })
+            .addDisposableTo(disposeBag)
     }
 
 }
