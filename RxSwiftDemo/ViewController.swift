@@ -26,8 +26,12 @@ class ViewController: UIViewController {
                 return priorValue + 1
             }
             .debug("after scan")
-            .subscribe(onNext: { [unowned self] currentCount in
-                self.label.text = "You have tapped that button \(currentCount) times."
+            .map { currentCount in
+                return "You have tapped that button \(currentCount) times."
+            }
+            .debug("after map")
+            .subscribe(onNext: { [unowned self] newText in
+                self.label.text = newText
             })
             .addDisposableTo(disposeBag)
     }
