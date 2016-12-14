@@ -24,15 +24,10 @@ class ViewController: UIViewController {
         self.button.rx.tap
             .debug("button tap")
             .subscribe(onNext: { [unowned self] _ in
-                self.onButtonTap()
+                self.count += 1
+                self.label.text = "You tapped that button \(self.count) times."
             }).addDisposableTo(disposeBag)
     }
-    
-    @IBAction private func onButtonTap() {
-        self.count += 1
-        self.label.text = "You have tapped that button \(count) times."
-    }
-
 
 }
 
