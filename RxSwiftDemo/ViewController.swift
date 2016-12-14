@@ -26,13 +26,12 @@ class ViewController: UIViewController {
                 return priorValue + 1
             }
             .debug("after scan")
+            .asDriver(onErrorJustReturn: 0)
             .map { currentCount in
                 return "You have tapped that button \(currentCount) times."
             }
             .debug("after map")
-            .subscribe(onNext: { [unowned self] newText in
-                self.label.text = newText
-            })
+            .drive(self.label.rx.text)
             .addDisposableTo(disposeBag)
     }
 
