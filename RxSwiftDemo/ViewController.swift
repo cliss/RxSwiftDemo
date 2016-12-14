@@ -21,16 +21,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         self.button.rx.tap
-            .debug("button tap")
             .scan(0) { (priorValue, _) in
                 return priorValue + 1
             }
-            .debug("after scan")
             .asDriver(onErrorJustReturn: 0)
             .map { currentCount in
                 return "You have tapped that button \(currentCount) times."
             }
-            .debug("after map")
             .drive(self.label.rx.text)
             .addDisposableTo(disposeBag)
     }
