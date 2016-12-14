@@ -31,9 +31,6 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cn4-m4-QDj">
                                 <rect key="frame" x="161.5" y="537" width="51" height="30"/>
                                 <state key="normal" title="Tap Me"/>
-                                <connections>
-                                    <action selector="onButtonTapWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Px6-IY-iV1"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -46,6 +43,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="button" destination="cn4-m4-QDj" id="tDK-yV-31x"/>
                         <outlet property="label" destination="A1y-ct-us0" id="a5G-EQ-Brc"/>
                     </connections>
                 </viewController>
