@@ -18,12 +18,14 @@ class ViewController: UIViewController {
     
     // MARK: ivars
     private let disposeBag = DisposeBag()
+    private lazy var presenter: Presenter = {
+        let eventProvider = EventProvider(buttonTapped: self.button.rx.tap.asObservable())
+        return Presenter(eventProvider: eventProvider)
+    }()
     
     override func viewDidLoad() {
-        self.button.rx.tap
-            .scan(0) { (priorValue, _) in
-                return priorValue + 1
-            }
+        
+        self.presenter.count
             .asDriver(onErrorJustReturn: 0)
             .map { currentCount in
                 return "You have tapped that button \(currentCount) times."
